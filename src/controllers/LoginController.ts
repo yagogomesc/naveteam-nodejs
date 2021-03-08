@@ -3,6 +3,7 @@ import { compare, hash } from "bcrypt";
 import { getCustomRepository } from "typeorm";
 import { UsersRepository } from "../repositories/UsersRepository";
 import { AppError } from "../errors/AppError";
+import * as jwt from "jsonwebtoken";
 
 class LoginController {
   async login(request: Request, response: Response) {
@@ -22,7 +23,17 @@ class LoginController {
       throw new AppError("Username or Password was invalid");
     }
 
-    return response.status(201).json("Login OK");
+    const userToken = jwt.sign(
+      { id: user.id, email },
+      process.env.ACCESS_JWT_SECRET,
+      {
+        expiresIn: process.env.JWT_EXPIRES || 36000,
+      }
+    );
+
+    return response
+      .status(201)
+      .json(`Login OK! Use this token to get your access: ${userToken}`);
   }
 }
 
