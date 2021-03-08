@@ -15,6 +15,6 @@ router.post("/login", loginController.login);
 
 router.use(authenticateToken);
 
-router.get("/projects", projectController.test);
+router.get("/projects", projectController.create);
 
 export { router };
