@@ -31,9 +31,7 @@ class LoginController {
       }
     );
 
-    return response
-      .status(201)
-      .json(`Login OK! Use this token to get your access: ${userToken}`);
+    return response.status(201).json(`Bearer ${userToken}`);
   }
 }
 
