@@ -8,12 +8,12 @@ export class CreateNaversProjects1615069721533 implements MigrationInterface {
         columns: [
           {
             name: "naver_id",
-            type: "int",
+            type: "integer",
             isPrimary: true,
           },
           {
             name: "project_id",
-            type: "int",
+            type: "integer",
             isPrimary: true,
           },
         ],

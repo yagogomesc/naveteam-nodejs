@@ -15,7 +15,7 @@ export class CreateNavers1615069664786 implements MigrationInterface {
           },
           {
             name: "user_id",
-            type: "int",
+            type: "integer",
             isNullable: true,
           },
           {

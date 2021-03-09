@@ -16,7 +16,7 @@ export class CreateProjects1615069710284 implements MigrationInterface {
           },
           {
             name: "user_id",
-            type: "int",
+            type: "integer",
             isNullable: true,
           },
           {
