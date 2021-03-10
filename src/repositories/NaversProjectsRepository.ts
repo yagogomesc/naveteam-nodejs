@@ -9,7 +9,9 @@ class NaversProjectsRepository extends Repository<NaverProject> {
     navers_ids.forEach((id) => {
       naversAndProjects.push({
         naver_id: id,
+        naver: id,
         project_id,
+        project: project_id,
       });
     });
 
@@ -24,7 +26,9 @@ class NaversProjectsRepository extends Repository<NaverProject> {
     projects_ids.forEach((id) => {
       naversAndProjects.push({
         naver_id,
+        naver: naver_id,
         project_id: id,
+        project: id,
       });
     });
 

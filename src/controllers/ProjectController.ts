@@ -11,7 +11,7 @@ class ProjectController {
       user_id: request.id,
     });
 
-    if (!projects) {
+    if (projects.length == 0) {
       throw new AppError("You don't have any registered projects");
     }
 
@@ -29,7 +29,7 @@ class ProjectController {
 
     await projectsRepository.save(project);
 
-    projectsRepository.storeProjectNavers(request.id, project.id, navers);
+    projectsRepository.storeProjectNavers(project.id, navers);
 
     return response.status(201).json(project);
   }
@@ -47,7 +47,7 @@ class ProjectController {
       user_id: request.id,
     });
 
-    if (!project) {
+    if (project.length == 0) {
       throw new AppError(
         "Can't find project or you don't registered the project"
       );

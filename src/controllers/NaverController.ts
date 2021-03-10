@@ -12,7 +12,7 @@ class NaverController {
       user_id: request.id,
     });
 
-    if (!navers) {
+    if (navers.length == 0) {
       throw new AppError("You don't have any navers registered");
     }
 
@@ -20,7 +20,13 @@ class NaverController {
   }
 
   async store(request: Request, response: Response) {
-    const { name, birthdate, admission_date, job_role } = request.body;
+    const {
+      name,
+      birthdate,
+      admission_date,
+      job_role,
+      projects,
+    } = request.body;
     const naversRepository = getCustomRepository(NaversRepository);
 
     const naver = naversRepository.create({
@@ -32,6 +38,8 @@ class NaverController {
     });
 
     await naversRepository.save(naver);
+
+    await naversRepository.storeNaverProjects(naver.id, projects);
 
     return response.status(200).json(naver);
   }
@@ -46,11 +54,8 @@ class NaverController {
     } = request.body;
     const { naver_id } = request.params;
     const naversRepository = getCustomRepository(NaversRepository);
-    const naversProjectsRepository = getCustomRepository(
-      NaversProjectsRepository
-    );
 
-    const naver = naversRepository.create({
+    const naver = await naversRepository.findOne({
       user_id: request.id,
       id: Number(naver_id),
     });
@@ -61,7 +66,7 @@ class NaverController {
 
     await naversRepository.save(naver);
 
-    await naversProjectsRepository.storeMultiProjects(naver.id, projects);
+    await naversRepository.storeNaverProjects(naver.id, projects);
 
     return response.status(200).json(naver);
   }
@@ -72,10 +77,10 @@ class NaverController {
 
     const navers = await naversRepository.find({
       where: { user_id: request.id, id: Number(naver_id) },
-      relations: ["naverProject"],
+      relations: ["naverProject", "naverProject.project"],
     });
 
-    if (!navers) {
+    if (navers.length == 0) {
       throw new AppError("You don't have any navers registered");
     }
 
@@ -91,7 +96,7 @@ class NaverController {
       user_id: request.id,
     });
 
-    if (!naver) {
+    if (naver.length == 0) {
       throw new AppError("Can't found naver or you don't registered the naver");
     }
 
