@@ -5,11 +5,10 @@ import { ProjectsRepository } from "../repositories/ProjectsRepository";
 
 class ProjectController {
   async index(request: Request, response: Response) {
+    const query = request.query;
     const projectsRepository = getCustomRepository(ProjectsRepository);
 
-    const projects = await projectsRepository.find({
-      user_id: request.id,
-    });
+    const projects = await projectsRepository.findAllByQuery(request.id, query);
 
     if (projects.length == 0) {
       throw new AppError("You don't have any registered projects");
