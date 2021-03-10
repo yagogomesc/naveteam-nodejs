@@ -6,11 +6,10 @@ import { NaversRepository } from "../repositories/NaversRepository";
 
 class NaverController {
   async index(request: Request, response: Response) {
+    const query = request.query;
     const naversRepository = getCustomRepository(NaversRepository);
 
-    const navers = await naversRepository.find({
-      user_id: request.id,
-    });
+    const navers = await naversRepository.findAllByQuery(request.id, query);
 
     if (navers.length == 0) {
       throw new AppError("You don't have any navers registered");
