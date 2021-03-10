@@ -22,7 +22,7 @@ class NaversRepository extends Repository<Naver> {
       })
     );
 
-    await naversProjectsRepository.storeMultiProjects({
+    naversProjectsRepository.storeMultiProjects({
       projects_ids: projects,
       naver_id: naver_id,
     });
