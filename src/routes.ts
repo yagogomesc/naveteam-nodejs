@@ -17,8 +17,12 @@ router.post("/login", loginController.login);
 
 router.use(authenticateToken);
 
-router.post("/project", projectController.create);
+router.get("/projects", projectController.index);
+router.post("/projects", projectController.create);
+router.delete("/projects/:project_id", projectController.delete);
 
-router.post("/naver", naverController.create);
+router.get("/navers", naverController.index);
+router.post("/navers", naverController.create);
+router.delete("/navers/:naver_id", naverController.delete);
 
 export { router };
