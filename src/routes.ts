@@ -18,11 +18,15 @@ router.post("/login", loginController.login);
 router.use(authenticateToken);
 
 router.get("/projects", projectController.index);
-router.post("/projects", projectController.create);
+router.get("/projects/:project_id", projectController.show);
+router.post("/projects", projectController.store);
+router.post("/projects/:project_id", projectController.update);
 router.delete("/projects/:project_id", projectController.delete);
 
 router.get("/navers", naverController.index);
-router.post("/navers", naverController.create);
+router.get("/navers/:naver_id", naverController.show);
+router.post("/navers", naverController.store);
+router.post("/navers/:naver_id", naverController.update);
 router.delete("/navers/:naver_id", naverController.delete);
 
 export { router };

@@ -18,7 +18,7 @@ class NaverController {
     return response.json(navers);
   }
 
-  async create(request: Request, response: Response) {
+  async store(request: Request, response: Response) {
     const { name, birthdate, admission_date, job_role } = request.body;
     const naversRepository = getCustomRepository(NaversRepository);
 
@@ -34,6 +34,8 @@ class NaverController {
 
     return response.status(200).json(naver);
   }
+
+  async update(request: Request, response: Response) {}
 
   async show(request: Request, response: Response) {}
 

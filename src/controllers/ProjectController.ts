@@ -18,7 +18,7 @@ class ProjectController {
     return response.json(projects);
   }
 
-  async create(request: Request, response: Response) {
+  async store(request: Request, response: Response) {
     const { name, navers } = request.body;
     const projectsRepository = getCustomRepository(ProjectsRepository);
 
@@ -33,6 +33,10 @@ class ProjectController {
 
     return response.status(201).json(project);
   }
+
+  async update(request: Request, response: Response) {}
+
+  async show(request: Request, response: Response) {}
 
   async delete(request: Request, response: Response) {
     const { project_id } = request.params;
