@@ -44,7 +44,7 @@ class NaversRepository extends Repository<Naver> {
     const whereVariables = { user_id };
 
     if (query.name) {
-      whereClause += " AND name LIKE :name";
+      whereClause += " AND LOWER(name) LIKE LOWER(:name)";
       Object.assign(whereVariables, { name: `%${query.name}%` });
     }
 
