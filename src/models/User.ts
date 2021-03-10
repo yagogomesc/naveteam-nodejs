@@ -3,9 +3,9 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-} from "typeorm";
+} from 'typeorm';
 
-@Entity("users")
+@Entity('users')
 class User {
   @PrimaryGeneratedColumn()
   readonly id: number;

@@ -1,42 +1,42 @@
-import { query } from "express";
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { query } from 'express';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateProjects1615069710284 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "projects",
+        name: 'projects',
         columns: [
           {
-            name: "id",
-            type: "integer",
+            name: 'id',
+            type: 'integer',
             isPrimary: true,
             isGenerated: true,
-            generationStrategy: "increment",
+            generationStrategy: 'increment',
           },
           {
-            name: "user_id",
-            type: "integer",
+            name: 'user_id',
+            type: 'integer',
             isNullable: true,
           },
           {
-            name: "name",
-            type: "varchar",
+            name: 'name',
+            type: 'varchar',
           },
           {
-            name: "created_at",
-            type: "timestamp",
-            default: "now()",
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
           },
         ],
         foreignKeys: [
           {
-            name: "FKProjectsUser",
-            referencedTableName: "users",
-            referencedColumnNames: ["id"],
-            columnNames: ["user_id"],
-            onDelete: "SET NULL",
-            onUpdate: "CASCADE",
+            name: 'FKProjectsUser',
+            referencedTableName: 'users',
+            referencedColumnNames: ['id'],
+            columnNames: ['user_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'CASCADE',
           },
         ],
       })
@@ -44,6 +44,6 @@ export class CreateProjects1615069710284 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("projects");
+    await queryRunner.dropTable('projects');
   }
 }

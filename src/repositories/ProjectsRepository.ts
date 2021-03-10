@@ -3,11 +3,11 @@ import {
   getCustomRepository,
   getRepository,
   Repository,
-} from "typeorm";
-import { AppError } from "../errors/AppError";
-import { Project } from "../models/Project";
-import { NaversProjectsRepository } from "./NaversProjectsRepository";
-import { NaversRepository } from "./NaversRepository";
+} from 'typeorm';
+import { AppError } from '../errors/AppError';
+import { Project } from '../models/Project';
+import { NaversProjectsRepository } from './NaversProjectsRepository';
+import { NaversRepository } from './NaversRepository';
 
 interface projectsQueryInterface {
   name?: string;
@@ -22,7 +22,7 @@ class ProjectsRepository extends Repository<Project> {
     );
 
     await Promise.all(
-      navers.map(async (id) => {
+      navers.map(async id => {
         const naverExists = await naversRepository.find({ id });
 
         if (naverExists.length == 0) {
@@ -38,11 +38,11 @@ class ProjectsRepository extends Repository<Project> {
   }
 
   public async findAllByQuery(user_id: number, query: projectsQueryInterface) {
-    let whereClause = "user_id = :user_id";
+    let whereClause = 'user_id = :user_id';
     const whereVariables = { user_id };
 
     if (query.name) {
-      whereClause += " AND LOWER(name) LIKE LOWER(:name)";
+      whereClause += ' AND LOWER(name) LIKE LOWER(:name)';
       Object.assign(whereVariables, { name: `%${query.name}%` });
     }
 

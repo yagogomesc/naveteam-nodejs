@@ -3,11 +3,11 @@ import {
   getCustomRepository,
   getRepository,
   Repository,
-} from "typeorm";
-import { AppError } from "../errors/AppError";
-import { Naver } from "../models/Naver";
-import { NaversProjectsRepository } from "./NaversProjectsRepository";
-import { ProjectsRepository } from "./ProjectsRepository";
+} from 'typeorm';
+import { AppError } from '../errors/AppError';
+import { Naver } from '../models/Naver';
+import { NaversProjectsRepository } from './NaversProjectsRepository';
+import { ProjectsRepository } from './ProjectsRepository';
 
 interface naversQueryInterface {
   name?: string;
@@ -22,9 +22,9 @@ class NaversRepository extends Repository<Naver> {
     const naversProjectsRepository = getCustomRepository(
       NaversProjectsRepository
     );
-    console.log("teste");
+    console.log('teste');
     await Promise.all(
-      projects.map(async (id) => {
+      projects.map(async id => {
         const projectExists = await projectsRepository.find({ id });
 
         if (projectExists.length == 0) {
@@ -40,21 +40,21 @@ class NaversRepository extends Repository<Naver> {
   }
 
   public async findAllByQuery(user_id: number, query: naversQueryInterface) {
-    let whereClause = "user_id = :user_id";
+    let whereClause = 'user_id = :user_id';
     const whereVariables = { user_id };
 
     if (query.name) {
-      whereClause += " AND LOWER(name) LIKE LOWER(:name)";
+      whereClause += ' AND LOWER(name) LIKE LOWER(:name)';
       Object.assign(whereVariables, { name: `%${query.name}%` });
     }
 
     if (query.admission_date) {
-      whereClause += " AND admission_date = :admission_date";
+      whereClause += ' AND admission_date = :admission_date';
       Object.assign(whereVariables, { admission_date: query.admission_date });
     }
 
     if (query.job_role) {
-      whereClause += " AND LOWER(job_role) LIKE LOWER(:job_role)";
+      whereClause += ' AND LOWER(job_role) LIKE LOWER(:job_role)';
       Object.assign(whereVariables, { job_role: `%${query.job_role}%` });
     }
 

@@ -63,6 +63,8 @@ class NaverController {
       job_role,
       projects,
     } = request.body;
+    const { naver_id } = request.params;
+    const naversRepository = getCustomRepository(NaversRepository);
 
     const schema = yup.object().shape({
       name: yup.string().required(),
@@ -72,11 +74,13 @@ class NaverController {
       projects: yup.array().of(yup.number()).required(),
     });
 
+    const schemaNaverId = yup.object().shape({
+      naver_id: yup.number().required('Please insert ID number'),
+    });
+
     try {
       await schema.validate(request.body, { abortEarly: false });
-
-      const { naver_id } = request.params;
-      const naversRepository = getCustomRepository(NaversRepository);
+      await schemaNaverId.validate(request.params);
 
       const naver = await naversRepository.findOne({
         user_id: request.id,

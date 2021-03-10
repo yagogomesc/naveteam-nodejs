@@ -8,12 +8,12 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-} from "typeorm";
-import { NaverProject } from "./NaverProject";
-import { Project } from "./Project";
-import { User } from "./User";
+} from 'typeorm';
+import { NaverProject } from './NaverProject';
+import { Project } from './Project';
+import { User } from './User';
 
-@Entity("navers")
+@Entity('navers')
 class Naver {
   @PrimaryGeneratedColumn()
   readonly id: number;
@@ -22,7 +22,7 @@ class Naver {
   user_id: number;
 
   @ManyToOne(() => User)
-  @JoinColumn({ name: "user_id" })
+  @JoinColumn({ name: 'user_id' })
   user: User;
 
   @Column()
@@ -40,7 +40,7 @@ class Naver {
   @CreateDateColumn()
   created_at: Date;
 
-  @OneToMany((type) => NaverProject, (naverProject) => naverProject.naver)
+  @OneToMany(type => NaverProject, naverProject => naverProject.naver)
   public naverProject!: NaverProject[];
 }
 

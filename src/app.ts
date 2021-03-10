@@ -1,9 +1,9 @@
-import express, { NextFunction, Request, Response } from "express";
-import "express-async-errors";
-import "reflect-metadata";
-import { createConnection } from "typeorm";
-import { AppError } from "./errors/AppError";
-import { router } from "./routes";
+import express, { NextFunction, Request, Response } from 'express';
+import 'express-async-errors';
+import 'reflect-metadata';
+import { createConnection } from 'typeorm';
+import { AppError } from './errors/AppError';
+import { router } from './routes';
 
 createConnection();
 
@@ -22,7 +22,7 @@ app.use(
     }
 
     return response.status(500).json({
-      status: "Error",
+      status: 'Error',
       message: `Internal server error ${err.message}`,
     });
   }

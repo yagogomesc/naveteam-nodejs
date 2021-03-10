@@ -1,38 +1,38 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateNaversProjects1615069721533 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "navers_projects",
+        name: 'navers_projects',
         columns: [
           {
-            name: "naver_id",
-            type: "integer",
+            name: 'naver_id',
+            type: 'integer',
             isPrimary: true,
           },
           {
-            name: "project_id",
-            type: "integer",
+            name: 'project_id',
+            type: 'integer',
             isPrimary: true,
           },
         ],
         foreignKeys: [
           {
-            name: "FKNaverProject",
-            referencedTableName: "navers",
-            referencedColumnNames: ["id"],
-            columnNames: ["naver_id"],
-            onDelete: "CASCADE",
-            onUpdate: "CASCADE",
+            name: 'FKNaverProject',
+            referencedTableName: 'navers',
+            referencedColumnNames: ['id'],
+            columnNames: ['naver_id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
           },
           {
-            name: "FKProjectNaver",
-            referencedTableName: "projects",
-            referencedColumnNames: ["id"],
-            columnNames: ["project_id"],
-            onDelete: "CASCADE",
-            onUpdate: "CASCADE",
+            name: 'FKProjectNaver',
+            referencedTableName: 'projects',
+            referencedColumnNames: ['id'],
+            columnNames: ['project_id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
           },
         ],
       })
@@ -40,6 +40,6 @@ export class CreateNaversProjects1615069721533 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("navers_projects");
+    await queryRunner.dropTable('navers_projects');
   }
 }

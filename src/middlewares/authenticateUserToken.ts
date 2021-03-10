@@ -1,6 +1,6 @@
-import { NextFunction, Request, Response } from "express";
-import * as jwt from "jsonwebtoken";
-import { AppError } from "../errors/AppError";
+import { NextFunction, Request, Response } from 'express';
+import * as jwt from 'jsonwebtoken';
+import { AppError } from '../errors/AppError';
 
 interface JWTpayload {
   id: number;
@@ -14,10 +14,10 @@ function authenticateToken(
   response: Response,
   next: NextFunction
 ) {
-  const authHeader = request.headers["authorization"];
-  const [, token] = authHeader.split(" ");
+  const authHeader = request.headers['authorization'];
+  const [, token] = authHeader.split(' ');
   if (token == null) {
-    throw new AppError("JWT token is missing");
+    throw new AppError('JWT token is missing');
   }
 
   try {
@@ -29,7 +29,7 @@ function authenticateToken(
 
     return next();
   } catch (error) {
-    throw new AppError("Invalid JWT", 401);
+    throw new AppError('Invalid JWT', 401);
   }
 }
 

@@ -1,53 +1,53 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateNavers1615069664786 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "navers",
+        name: 'navers',
         columns: [
           {
-            name: "id",
-            type: "integer",
+            name: 'id',
+            type: 'integer',
             isPrimary: true,
             isGenerated: true,
-            generationStrategy: "increment",
+            generationStrategy: 'increment',
           },
           {
-            name: "user_id",
-            type: "integer",
+            name: 'user_id',
+            type: 'integer',
             isNullable: true,
           },
           {
-            name: "name",
-            type: "varchar",
+            name: 'name',
+            type: 'varchar',
           },
           {
-            name: "birthdate",
-            type: "date",
+            name: 'birthdate',
+            type: 'date',
           },
           {
-            name: "admission_date",
-            type: "date",
+            name: 'admission_date',
+            type: 'date',
           },
           {
-            name: "job_role",
-            type: "varchar",
+            name: 'job_role',
+            type: 'varchar',
           },
           {
-            name: "created_at",
-            type: "timestamp",
-            default: "now()",
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
           },
         ],
         foreignKeys: [
           {
-            name: "FKNaversUser",
-            referencedTableName: "users",
-            referencedColumnNames: ["id"],
-            columnNames: ["user_id"],
-            onDelete: "SET NULL",
-            onUpdate: "CASCADE",
+            name: 'FKNaversUser',
+            referencedTableName: 'users',
+            referencedColumnNames: ['id'],
+            columnNames: ['user_id'],
+            onDelete: 'SET NULL',
+            onUpdate: 'CASCADE',
           },
         ],
       })
@@ -55,6 +55,6 @@ export class CreateNavers1615069664786 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("navers");
+    await queryRunner.dropTable('navers');
   }
 }
