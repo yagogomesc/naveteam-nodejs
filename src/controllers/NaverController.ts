@@ -52,6 +52,7 @@ class NaverController {
       job_role,
       projects,
     } = request.body;
+    console.log("teste");
     const { naver_id } = request.params;
     const naversRepository = getCustomRepository(NaversRepository);
 
@@ -59,16 +60,17 @@ class NaverController {
       user_id: request.id,
       id: Number(naver_id),
     });
+    console.log(naver);
     naver.name = name;
     naver.birthdate = birthdate;
     naver.admission_date = admission_date;
     naver.job_role = job_role;
 
-    await naversRepository.save(naver);
-
     await naversRepository.storeNaverProjects(naver.id, projects);
 
-    return response.status(200).json(naver);
+    const updatedNaver = await naversRepository.save(naver);
+
+    return response.status(200).json(updatedNaver);
   }
 
   async show(request: Request, response: Response) {

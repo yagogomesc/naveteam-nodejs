@@ -11,7 +11,7 @@ class NaversRepository extends Repository<Naver> {
     const naversProjectsRepository = getCustomRepository(
       NaversProjectsRepository
     );
-
+    console.log("teste");
     await Promise.all(
       projects.map(async (id) => {
         const projectExists = await projectsRepository.find({ id });
@@ -22,9 +22,9 @@ class NaversRepository extends Repository<Naver> {
       })
     );
 
-    naversProjectsRepository.storeMultiProjects({
+    await naversProjectsRepository.storeMultiProjects({
+      naver_id,
       projects_ids: projects,
-      naver_id: naver_id,
     });
   }
 }

@@ -21,7 +21,7 @@ class NaversProjectsRepository extends Repository<NaverProject> {
     await this.save(naverProject);
   }
 
-  async storeMultiProjects(naver_id: number, projects_ids: number[]) {
+  async storeMultiProjects({ naver_id, projects_ids }): Promise<void> {
     await this.deleteAllByNaver(naver_id);
     const naversAndProjects = [];
 
