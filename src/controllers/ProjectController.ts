@@ -34,9 +34,41 @@ class ProjectController {
     return response.status(201).json(project);
   }
 
-  async update(request: Request, response: Response) {}
+  async update(request: Request, response: Response) {
+    const { name, navers } = request.body;
+    const { project_id } = request.params;
+    const projectsRepository = getCustomRepository(ProjectsRepository);
 
-  async show(request: Request, response: Response) {}
+    const project = await projectsRepository.findOne({
+      user_id: request.id,
+      id: Number(project_id),
+    });
+    project.name = name;
+
+    await projectsRepository.save(project);
+
+    projectsRepository.storeProjectNavers(project.id, navers);
+
+    return response.json(project);
+  }
+
+  async show(request: Request, response: Response) {
+    const { project_id } = request.params;
+    const projectsRepository = getCustomRepository(ProjectsRepository);
+
+    const projects = await projectsRepository.find({
+      where: { user_id: request.id, id: Number(project_id) },
+      relations: ["naverProject", "naverProject.naver"],
+    });
+
+    if (projects.length == 0) {
+      throw new AppError(
+        `You don't have registered project or can't find project ID: ${project_id}`
+      );
+    }
+
+    return response.json(projects);
+  }
 
   async delete(request: Request, response: Response) {
     const { project_id } = request.params;
@@ -49,7 +81,7 @@ class ProjectController {
 
     if (project.length == 0) {
       throw new AppError(
-        "Can't find project or you don't registered the project"
+        `Can't find project or you don't registered the project ID: ${project_id}`
       );
     }
 

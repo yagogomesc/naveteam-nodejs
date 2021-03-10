@@ -81,7 +81,7 @@ class NaverController {
     });
 
     if (navers.length == 0) {
-      throw new AppError("You don't have any navers registered");
+      `You don't have registered this naver or can't find naver ID: ${naver_id}`;
     }
 
     return response.json(navers);
@@ -97,7 +97,9 @@ class NaverController {
     });
 
     if (naver.length == 0) {
-      throw new AppError("Can't found naver or you don't registered the naver");
+      throw new AppError(
+        `Can't found naver or you don't registered the naver ID ${naver_id}`
+      );
     }
 
     await naversRepository.delete(naver_id);
