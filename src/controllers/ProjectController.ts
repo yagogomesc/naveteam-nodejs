@@ -29,7 +29,7 @@ class ProjectController {
 
     await projectsRepository.save(project);
 
-    projectsRepository.storeProjectNavers(project.id, navers);
+    await projectsRepository.storeProjectNavers(project.id, navers);
 
     return response.status(201).json(project);
   }
@@ -43,6 +43,7 @@ class ProjectController {
       user_id: request.id,
       id: Number(project_id),
     });
+
     project.name = name;
 
     await projectsRepository.storeProjectNavers(project.id, navers);

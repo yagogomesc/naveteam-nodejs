@@ -51,7 +51,7 @@ class NaverController {
       job_role,
       projects,
     } = request.body;
-    console.log("teste");
+
     const { naver_id } = request.params;
     const naversRepository = getCustomRepository(NaversRepository);
 
