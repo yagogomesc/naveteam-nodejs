@@ -3,9 +3,14 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { NaverProject } from "./NaverProject";
+import { Project } from "./Project";
 import { User } from "./User";
 
 @Entity("navers")
@@ -34,6 +39,9 @@ class Naver {
 
   @CreateDateColumn()
   created_at: Date;
+
+  @OneToMany((type) => NaverProject, (naverProject) => naverProject.naver)
+  public naverProject!: NaverProject[];
 }
 
 export { Naver };

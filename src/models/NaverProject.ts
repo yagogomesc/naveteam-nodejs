@@ -1,4 +1,11 @@
-import { Entity, JoinColumn, ManyToMany, PrimaryColumn } from "typeorm";
+import {
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  PrimaryColumn,
+} from "typeorm";
 import { Naver } from "./Naver";
 import { Project } from "./Project";
 
@@ -7,16 +14,16 @@ class NaverProject {
   @PrimaryColumn()
   naver_id: number;
 
-  @ManyToMany(() => Naver)
-  @JoinColumn({ name: "naver_id" })
-  naver: Naver;
+  @ManyToOne((type) => Naver, (naver) => naver.naverProject)
+  @JoinTable()
+  naver!: Naver;
 
   @PrimaryColumn()
   project_id: number;
 
-  @ManyToMany(() => Project)
-  @JoinColumn({ name: "project_id" })
-  project: Project;
+  @ManyToOne((type) => Project, (project) => project.naverProject)
+  @JoinTable()
+  project!: Project;
 }
 
 export { NaverProject };
