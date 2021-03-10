@@ -60,7 +60,7 @@ class NaverController {
       user_id: request.id,
       id: Number(naver_id),
     });
-    console.log(naver);
+
     naver.name = name;
     naver.birthdate = birthdate;
     naver.admission_date = admission_date;

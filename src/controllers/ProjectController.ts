@@ -45,11 +45,11 @@ class ProjectController {
     });
     project.name = name;
 
-    await projectsRepository.save(project);
+    await projectsRepository.storeProjectNavers(project.id, navers);
 
-    projectsRepository.storeProjectNavers(project.id, navers);
+    const projectUpdated = await projectsRepository.save(project);
 
-    return response.json(project);
+    return response.json(projectUpdated);
   }
 
   async show(request: Request, response: Response) {
